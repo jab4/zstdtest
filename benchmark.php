@@ -62,7 +62,7 @@ class myZstdBenchmark {
     static function main($baseURL) {
         foreach (self::$opts as $opt) {
             if ($opt == 'zstd') {
-                for ($zstdLevel = 3; $zstdLevel <= 22; $zstdLevel++) {
+                for ($zstdLevel = 1; $zstdLevel <= 22; $zstdLevel++) {
                     $opt = 'zstd' . $zstdLevel;
                     self::getTiming($opt, $baseURL . $opt);
                 }
