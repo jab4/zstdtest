@@ -3,7 +3,7 @@
 
 Just heard the news that Chrome is rolling now with support for "Content-Encoding: zstd". Whoa! Finally.
 
-Now lets put some pressure on the not-so-more innovative folk at Mozilla/Firefox.
+Now let's put some pressure on the not-so-more innovative folk at Mozilla/Firefox.
 
 Anyhow, here are my
 
@@ -109,5 +109,27 @@ So it basically only spits out what it's being asked for, by means of the _?comp
 - CPU: AMD Ryzen 7 5700G with Radeon Graphics (family: 0x19, model: 0x50, stepping: 0x0)
 
 # License
-- MIT. Do however you please.
 - Test document "War and Peace" licensed under the [Project Gutenberg license](https://www.gutenberg.org/policy/license.html).
+- Code: MIT.
+  
+```
+Copyright (c) 2024
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
