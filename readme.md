@@ -9,6 +9,12 @@ Anyhow, here are my
 
 ## Results
 
+```PHP
+  /* zstd: */   ob_start(function(&$data) { return zstd_compress($data, $level); });
+  /* gzip: */   ob_start(function(&$data) { return gzencode($data); });
+  /* obgz: */   ob_start('ob_gzhandler');
+  /* none: */   ob_start(); # No compression with default config, i.e. zlib.output_compression = Off 
+```
 ```
   # none......:  4,039,229 Bytes;  100 requests in   3.16 secs  (avg=0.0316 s per req)
   # gzip......:  1,290,963 Bytes;  100 requests in  17.65 secs  (avg=0.1765 s per req)
@@ -36,12 +42,6 @@ Anyhow, here are my
   # zstd21....:    971,972 Bytes;  100 requests in 148.13 secs  (avg=1.4813 s per req)
   # zstd22....:    971,962 Bytes;  100 requests in 152.34 secs  (avg=1.5234 s per req)
 ```
-```PHP
-  /* zstd: */   ob_start(function(&$data) { return zstd_compress($data, $level); });
-  /* gzip: */   ob_start(function(&$data) { return gzencode($data); });
-  /* obgz: */   ob_start('ob_gzhandler');
-  /* none: */   ob_start(); # No compression with default config, i.e. zlib.output_compression = Off 
-```
 
 Source document is a 4 MB long HTML file, Project Gutenberg's rendition of [War and Peace](https://www.gutenberg.org/files/2600/2600-h/2600-h.htm), 
 served thru PHP script `war_and_peace.php` which applies output buffer compression as requested.
@@ -50,16 +50,18 @@ served thru PHP script `war_and_peace.php` which applies output buffer compressi
 
 - gzip handling via the built-in `ob_gzhandler` equals manually calling `gzencode`.
 - gzip is horribly slow and should be dumped from production servers. Feed bad clients raw uncompressed stuff, if you don't need to pay for traffic.
+- ~.01 sec overhead (over uncompressed) for amazing compression at zstd level 3 is super neglectable.
+- ...compared to the ~.13 sec overhead of using on-the-fly gzip! 
 - zstd levels 3 (default) .. 10 outperform gzip both time-wise and compression-wise
 - zstd levels 1 and 2 don't really matter
 
 ### Requirements
 
 - A web server
-- PHP
+- PHP (written with PHP 8.3, older major versions may work)
 - The great [zstd extension](https://github.com/kjdev/php-ext-zstd) by @kjdev 
 
-### How to run
+### How to run this yourself
 
 Example call:
 ```shell
@@ -67,7 +69,7 @@ php8.3 benchmark.php "https://localhost/zstdtest/war_and_peace.php?compression="
 ```
 The `compression=` is left blank, as it's fed by benchmark.php during runtime.
 
-The target, `war_and_peace.php`, contains the following:
+The target, `war_and_peace.php`, contain the following snippets:
 ```PHP
 $comp = $_GET['compression'];
 # ...
@@ -90,6 +92,8 @@ switch ($comp) {
     default:
         # nothing
 }
+
+readfile(__DIR__.'/war_and_peace.html');
 ```
 So it basically only spits out what it's being asked for, by means of the _?compression_ parameter.
 
@@ -105,4 +109,3 @@ So it basically only spits out what it's being asked for, by means of the _?comp
 # License
 - MIT. Do however you please.
 - Test document "War and Peace" licensed under the (Project Gutenberg license)[https://www.gutenberg.org/policy/license.html].
-
