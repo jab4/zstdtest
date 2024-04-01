@@ -9,6 +9,8 @@ Anyhow, here are my
 
 ## Results
 
+![zz_result_chart.png](https://github.com/jab4/zstdtest/blob/master/zz_result_chart.png?raw=true)
+
 ```PHP
   /* zstd: */   ob_start(function(&$data) { return zstd_compress($data, $level); });
   /* gzip: */   ob_start(function(&$data) { return gzencode($data); });
