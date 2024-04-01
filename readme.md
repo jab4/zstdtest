@@ -108,4 +108,4 @@ So it basically only spits out what it's being asked for, by means of the _?comp
 
 # License
 - MIT. Do however you please.
-- Test document "War and Peace" licensed under the (Project Gutenberg license)[https://www.gutenberg.org/policy/license.html].
+- Test document "War and Peace" licensed under the [Project Gutenberg license](https://www.gutenberg.org/policy/license.html).
